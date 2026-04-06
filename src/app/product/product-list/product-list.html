@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="card-body">
+    <!-- <div class="row">
+      <div class="col-mg-2">Filtrar por:</div>
+       <div class="col-mg-2">
+        <select class="form-select">
+          <option value="">Todos</option>
+          <option value="ventas">Ventas</option>
+          <option value="compras">Compras</option>
+          <option value="inventario">Inventario</option>
+        </select>
+      </div>
+    </div> -->
+    <div class="card border-primary mb-3 text-center">
+      <div class="card-header">Lista de productos</div>
+      <div class="card-body text-primary">
+        <div class="table-responsive">
+          @if (products() && products().length) {
+            <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  <button class="btn btn-primary" (click)="toggleImage()">
+                    <i class ="bi bi-eye"></i>
+                    {{showImage ? 'Ocultar' : 'Mostrar'}} Imagenes
+                  </button>
+                </th>
+                <th>Producto</th>
+                <th>Codigo</th>
+                <th>Disponible</th>
+                <th>Precio</th>
+                <th>Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (producto of products(); track producto){
+                <tr>
+                  <td>
+                    @if (showImage) {
+                      <img [src]="producto.imageUrl" alt="{{ producto.productName }}"
+                        [style.width.px]="imageWidth" [style.margin.px]="imageMargin" [style.height.px]="imageHeight">
+                    }
+                  </td>
+                  <td>{{ producto.productName }}</td>
+                  <td>{{ producto.productCode }}</td>
+                  <td>{{ producto.releaseDate }}</td>
+                  <td>{{ producto.price | currency }}</td>
+                  <td>{{ producto.starRating }}</td>
+                </tr>
+              }
+            </tbody>
+            </table>
+          } @else {
+            <p>No hay productos disponibles.</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
