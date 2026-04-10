@@ -37,15 +37,18 @@
                 <tr>
                   <td>
                     @if (showImage) {
-                      <img [src]="producto.imageUrl" alt="{{ producto.productName }}"
+                      <img [src]="producto.imageUrl | defaultImage" alt="{{ producto.productName }}"
                         [style.width.px]="imageWidth" [style.margin.px]="imageMargin" [style.height.px]="imageHeight">
                     }
                   </td>
                   <td>{{ producto.productName }}</td>
                   <td>{{ producto.productCode }}</td>
-                  <td>{{ producto.releaseDate }}</td>
-                  <td>{{ producto.price | currency }}</td>
-                  <td>{{ producto.starRating }}</td>
+                  <td>{{ producto.releaseDate  | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{ formatPrice(producto.price) }}</td>
+                  <!-- <td>{{ producto.starRating }}</td> -->
+                   <td>
+                    <app-star [rating]="producto.starRating"></app-star>
+                   </td>
                 </tr>
               }
             </tbody>

@@ -1,4 +1,3 @@
-
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -7,11 +6,21 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { ProductList } from './product/product-list/product-list';
+import { Star } from './product/product-list/star/star';
+import { ImagePipe } from './shared/image-pipe';
 
 @NgModule({
-  declarations: [App, ProductList],
-  imports: [BrowserModule, AppRoutingModule, NgxBootstrapIconsModule.pick(allIcons), FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgxBootstrapIconsModule.pick(allIcons),
+    FormsModule,
+    App,
+    ProductList,
+    Star,
+    ImagePipe
+  ],
   providers: [provideBrowserGlobalErrorListeners()],
-  bootstrap: [App],
+ 
 })
 export class AppModule {}

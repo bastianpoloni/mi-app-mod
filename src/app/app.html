@@ -3,17 +3,41 @@
     <img src="ACME_logo.png" width="100" alt="ACME Logo">
   </a>
   <div>
-    <h1 id="titulo">{{ title() }}</h1>
+    <h1 id="titulo">{{ title()}}</h1>
+    <!--{{ 'Titulo' + title() }}
+    {{ 'Titulo' + getTitle() }}
+    {{2*20 +1}}
+    <h1 innerText={{ title() }}></h1> -->
   </div>
 </nav>
-<div class ="row m-3">
-  <div class = "col-md-2">Filtrar por:</div>
-  <div class = "col-md-2">
-    <input type="text" [(ngModel)]="listFilter" placeholder="Filtrar">
+<!--<app-product-list [datos]="filteredProducts()"></app-product-list> -->
+
+<div class="row">
+  <div class="col-md-2">Filtrar por:</div>
+  <div class="col-md-2">
+    <input
+      type="text"
+      [value]="listFilter()"
+      (input)="updateFilter($event)"
+      placeholder="Buscar producto"
+      aria-label="Buscar producto"
+    >
   </div>
-  <div class = "col-md-8">
-    Filtrado por: {{ listFilter()}}
+  <div class="col-md-2">
+    Filtrado por: {{ listFilter() }}
+  </div>
+  <div class="col-md-2">
+    Dato recibido: {{ datoRecibido() }}
+  </div>
+  <div class="col-md-4">
+    <button class="btn btn-primary" (click)="toggleChildren()">
+      <i class="bi bi-eye"></i>
+      {{ showChildren() ? 'Ocultar' : 'Mostrar' }} Hijo
+    </button>
   </div>
 </div>
 
-<app-product-list [datos]="products"></app-product-list>
+<br>
+@if (showChildren()) {
+  <app-product-list [datos]="filteredProducts()" (datoEmitido)="datoRecibido.set($event)"></app-product-list>
+}
