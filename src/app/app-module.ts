@@ -18,9 +18,8 @@ import { ImagePipe } from './shared/image-pipe';
     App,
     ProductList,
     Star,
-    ImagePipe
+    ImagePipe,
   ],
   providers: [provideBrowserGlobalErrorListeners()],
- 
 })
 export class AppModule {}

@@ -23,11 +23,13 @@
       aria-label="Buscar producto"
     >
   </div>
-  <div class="col-md-2">
+  <div class="col-md-4">
     Filtrado por: {{ listFilter() }}
   </div>
   <div class="col-md-2">
-    Dato recibido: {{ datoRecibido() }}
+    <button class="btn btn-primary" (click)="abrirModal()">
+      Crear Producto
+    </button>
   </div>
   <div class="col-md-4">
     <button class="btn btn-primary" (click)="toggleChildren()">
@@ -38,8 +40,14 @@
 </div>
 
 <br>
+@if (isModalOpen()){
+  <app-modal-add (close)="cerrarModal()"></app-modal-add>
+}
+
 @if (showChildren()) {
-  <app-product-list [datos]="filteredProducts()" (datoEmitido)="datoRecibido.set($event)"></app-product-list>
+  <app-product-list [datos]="filteredProducts()" 
+  (updatedProducts)="products.set($event)">
+  </app-product-list>
 }
 <br>
 <div class = "card card-body">
@@ -61,3 +69,4 @@
     <p> Presion: {{weatherData().main.pressure}} hPa</p>
   } 
 </div>
+
