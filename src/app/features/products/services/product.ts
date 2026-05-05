@@ -1,25 +1,24 @@
 import { Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
-import {  HttpClient } from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import { Observable, pipe, timer } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map, switchMap } from 'rxjs/operators';
 import { IProduct } from '../interfaces/product';
 @Injectable({
   providedIn: 'root',
 })
 export class Product {
-
-   products = signal<IProduct[]>([]);
+  products = signal<IProduct[]>([]);
 
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>('http://localhost:3000/productos').pipe(
-      map((response: any) => response.productos)
-    );
+    return this.http
+      .get<IProduct[]>('http://localhost:3000/productos')
+      .pipe(map((response: any) => response.productos));
   }
 
   generateProductCode(): string {
-    const randomNum = Math.floor(Math.random() * (100 -10) + 10);
+    const randomNum = Math.floor(Math.random() * (100 - 10) + 10);
     return `PROD-${randomNum.toString().padStart(3, '0')}`;
   }
 
@@ -35,7 +34,13 @@ export class Product {
     return this.http.put<IProduct>(`http://localhost:3000/productos/${id}`, product);
   }
 
-
- 
+  searchProduct(code: string) {
+    return timer(1000).pipe(
+      switchMap(() => {
+        return this.http
+          .get<any>(`http://localhost:3000/existeproducto/${code}`)
+          .pipe(map((resp: any) => resp.data));
+      }),
+    );
+  }
 }
-
