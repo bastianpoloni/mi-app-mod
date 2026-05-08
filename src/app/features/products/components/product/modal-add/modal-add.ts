@@ -2,7 +2,7 @@ import { Component, inject, output } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, AsyncValidatorFn, AbstractControl } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 
-import { Product } from '../../services/product';
+import { Product as ProductService  } from '../../../services/product';
 
 @Component({
   selector: 'app-modal-add',
@@ -19,7 +19,7 @@ export class ModalAdd {
   }
   private fb = inject(FormBuilder);
   close = output<void>();
-  private productService = inject(Product);
+  private productService = inject(ProductService);
   ocultarModal() {
     this.close.emit();
   }

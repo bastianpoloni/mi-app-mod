@@ -2,9 +2,9 @@ import { Component, inject, input, output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Star } from './star/star';
 import { switchMap } from 'rxjs/operators';
-import { Product } from '../../services/product';
-import { IProduct } from '../../interfaces/product';
-import { ImagePipe } from '../../../../shared/image-pipe';
+import { Product } from '../../../services/product';
+import { IProduct } from '../../../interfaces/product';
+import { ImagePipe } from '../../../../../shared/image-pipe';
 
 @Component({
   selector: 'app-product-list',

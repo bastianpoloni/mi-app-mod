@@ -1,11 +1,12 @@
 import { Component, computed, signal } from '@angular/core';
-import { Product } from './features/products/components/product';
+import { Product } from './features/products/components/product/product';
 import { Product as ProductService } from './features/products/services/product';
+import {RouterOutlet, Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
-  imports: [Product],
+  imports: [RouterOutlet, RouterLink],
   providers: [ProductService],
   standalone: true,
   styleUrl: './app.css',
@@ -14,7 +15,8 @@ export class App {
   protected readonly title = signal('Empresa ACME');
   isModalOpen = signal(false);
 
-  constructor(public productService: ProductService) {}
+  //constructor(public productService: ProductService) {}
+  constructor(private router: Router){}
 
   listFilter = signal('');
   datoRecibido = signal('');
